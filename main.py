@@ -31,6 +31,11 @@ def make_chunks(text):
     return chunks
 
 
+def split_paragraphs(text):
+    paragraphs = text.split("\n\n")
+    return paragraphs
+
+
 def hash_chunks(chunks):
     hashed_chunks = []
     for chunk in chunks:
@@ -45,6 +50,64 @@ def hash_chunks(chunks):
         else:
             hashed_chunks.append(hashlib.sha512(chunk.encode()).hexdigest())
     return hashed_chunks
+
+def make_dino(paragraphs):
+    cipher_map = {
+        "a": "u", 
+        "b": "r",
+        "c": "s",
+        "d": "t",
+        "e": "o",
+        "f": "v",
+        "g": "w",
+        "h": "x",
+        "i": "a",
+        "j": "z",
+        "k": "b",
+        "l": "c",
+        "m": "m",
+        "n": "d",
+        "o": "e",
+        "p": "f",
+        "q": "g",
+        "r": "h",
+        "s": "j",
+        "t": "k",
+        "u": "i",
+        "v": "l",
+        "w": "n",
+        "x": "p",
+        "y": "o",
+        "z": "q",
+        "A": "U", 
+        "B": "R",
+        "C": "S",
+        "D": "T",
+        "E": "O",
+        "F": "V",
+        "G": "W",
+        "H": "X",
+        "I": "A",
+        "J": "Z",
+        "K": "B",
+        "L": "C",
+        "M": "M",
+        "N": "D",
+        "O": "E",
+        "P": "F",
+        "Q": "G",
+        "R": "H",
+        "S": "J",
+        "T": "K",
+        "U": "I",
+        "V": "L",
+        "W": "N",
+        "X": "P",
+        "Y": "O",
+        "Z": "Q"
+    }
+    for paragraph in paragraphs:
+        
 
 
 def write_chaff(hashed, output_path):
