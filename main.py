@@ -7,12 +7,26 @@ def main():
     if len(sys.argv) <= 1:
         print("Usage: python3 main.py <path_to_file>")
         sys.exit(1)
-    file_path = sys.argv[1]
+    dino_mode = "--dino" in sys.argv
+    args = [a for a in sys.argv[1:] if a != "--dino"]
+    file_path = args[0]
     text = get_file_text(file_path)
-    output_path = "output/chaff.txt"
-    chunks = make_chunks(text)
-    hashed = hash_chunks(chunks)
-    write_chaff(hashed, output_path)
+
+    if dino_mode:
+        file_name = os.path.basename(file_path)
+        base, ext = os.path.splitext(file_name)
+        paragraphs = split_paragraphs(text)
+        dino = make_dino(paragraphs)
+        dino_name = make_dino([base])
+        dino_file_name = dino_name[0] + ext
+        output_path = "output/" + dino_file_name
+        write_chaff(dino, output_path)
+
+    else:
+        output_path = "output/chaff.txt"
+        chunks = make_chunks(text)
+        hashed = hash_chunks(chunks)
+        write_chaff(hashed, output_path)
 
 
 def get_file_text(path):
@@ -52,6 +66,7 @@ def hash_chunks(chunks):
     return hashed_chunks
 
 def make_dino(paragraphs):
+    ciphered = []
     cipher_map = {
         "a": "u", 
         "b": "r",
@@ -106,8 +121,11 @@ def make_dino(paragraphs):
         "Y": "O",
         "Z": "Q"
     }
+    table = str.maketrans(cipher_map)
     for paragraph in paragraphs:
-        
+        cipher = paragraph.translate(table)
+        ciphered.append(cipher)
+    return ciphered
 
 
 def write_chaff(hashed, output_path):
@@ -115,3 +133,5 @@ def write_chaff(hashed, output_path):
     with open(output_path, "w") as f:
         for h in hashed:
             f.write(h + "\n")
+
+main()
