@@ -25,5 +25,4 @@ greater than 20 and up to 32 will go through SHA256.
 Greater than 32 will go through SHA512.
 
 Project extension idea:
-offer instead of using cryptographic algorhithms, run through simple cypher used for SFA: Dinosaur planet.
-This entire project is meant to mess with the heads of people who wish to do harm, so have fun with it.
+*secret*
